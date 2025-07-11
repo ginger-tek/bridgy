@@ -6,7 +6,7 @@ class Logger
 {
   public static function write(string $message, ?string $level = 'error'): void
   {
-    $logFile = 'data/logs/app.err';
+    $logFile = 'data/logs/app.log';
     if (!file_exists($logFile)) {
       if (!mkdir(dirname($logFile), 0755, true) && !is_dir(dirname($logFile))) {
         error_log("Failed to create log directory: " . dirname($logFile));
