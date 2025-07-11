@@ -12,14 +12,20 @@ use Bridgy\Controllers\ApiRoutes;
 $app = new Routy;
 
 $app->use(function (Routy $app) {
-  if (preg_match('#/nm/#', $app->uri))
-    $app->sendData('node_modules/' . str_replace('/nm/', '', $app->uri), match (pathinfo($app->uri, PATHINFO_EXTENSION)) {
+  if (preg_match('#/nm/#', $app->uri)) {
+    $path = 'node_modules/' . str_replace('/nm/', '', $app->uri);
+    if (!file_exists($path))
+      $app->end(404);
+    $app->sendData($path, match (pathinfo($app->uri, PATHINFO_EXTENSION)) {
       'js' => 'application/javascript',
       'css' => 'text/css',
       'html' => 'text/html',
       'json' => 'application/json',
+      'svg' => 'image/svg+xml',
+      'png' => 'image/png',
       default => 'text/plain'
     });
+  }
 });
 $app->group('/api', ApiRoutes::index(...));
 $app->serveStatic('public');
