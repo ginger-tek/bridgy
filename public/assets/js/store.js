@@ -1,5 +1,5 @@
 export default Vue.reactive({
-  user: null,
+  session: null,
   isAuthenticated: false,
   isLoading: false,
 })
