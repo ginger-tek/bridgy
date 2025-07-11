@@ -1,9 +1,9 @@
-import { Chart } from '/nm/chart.js/auto'
+import '/nm/chart.js/dist/chart.umd.js'
 
 export default {
-  template: `<div class="chart-container">
+  template: `<div style="position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center">
     <canvas ref="chartRef"></canvas>
-    <p v-if="!data.labels.length">No data available</p>
+    <p v-if="!hasData" align="center" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)">No data available</p>
   </div>`,
   props: {
     data: {
@@ -20,32 +20,45 @@ export default {
     options: {
       type: Object,
       default: () => ({
-        responsive: true,
         plugins: {}
       })
     }
   },
-  setup() {
+  setup(props) {
     const chartRef = Vue.ref(null)
 
     function initChart() {
-      if (chartRef.value) {
-        if (chartRef.value.chart)
-          chartRef.value.chart.destroy()
-        chartRef.value.chart = new Chart(chartRef.value, {
-          type: 'bar', // Default type, can be overridden by props
-          data: Vue.toRefs(this.data),
-          options: Vue.toRefs(this.options)
-        })
-      }
+      if (!hasData.value) return
+      if (!chartRef.value) return
+      chartRef.value.chart = new Chart(chartRef.value, {
+        type: props.type || 'bar',
+        data: props.data,
+        options: {
+          ...props.options,
+          responsive: true
+        }
+      })
     }
 
-    Vue.watch(() => [this.data, this.options], () => {
-      initChart()
-    })
+    Vue.watch(() => [props.type, props.data, props.options], (o, n) => {
+      console.log('Chart data or type changed:', o, n)
+      if (o[0] !== n[0] && chartRef.value?.chart) {
+        chartRef.value.chart.destroy()
+        initChart()
+      } else if (chartRef.value?.chart) {
+        chartRef.value.chart.data.labels = n[1].labels
+        chartRef.value.chart.data.datasets = n[1].datasets
+        chartRef.value.chart.update()
+      }
+    }, { deep: true })
+
+    const hasData = Vue.computed(() => props.data && props.data?.datasets?.length && props.data?.labels?.length)
+
+    Vue.onMounted(initChart)
 
     return {
       initChart,
+      hasData,
       chartRef
     }
   }

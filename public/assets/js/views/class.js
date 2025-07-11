@@ -13,7 +13,7 @@ export default {
       Modified: {{ new Date(classObj.modified).toLocaleDateString() }}
     </small></p>
   </form>
-  <pv-table :items="classAssignments" :fields="classAssignmentFields" bordered filter sort>
+  <pv-table :items="classAssignments" :fields="classAssignmentFields" :busy="loadingAssignments" bordered filter sort>
     <template #empty>
       <div class="text-center">
         <p>No one assigned yet</p>
@@ -60,7 +60,8 @@ export default {
     const api = Vue.inject('api')
     const edit = Vue.ref(false)
     const route = VueRouter.useRoute()
-    const loading = Vue.ref(false)
+    const loading = Vue.ref(true)
+    const loadingAssignments = Vue.ref(true)
     const classObj = Vue.ref({})
     const people = Vue.ref([])
     const classAssignments = Vue.ref([])
@@ -92,10 +93,13 @@ export default {
 
     async function fetchClassAssignments() {
       try {
+        loadingAssignments.value = true
         classAssignments.value = await api.get(`classes/${classObj.value.id}/assignments`)
       } catch (error) {
         console.error('Error fetching class assignments:', error)
         PicoVue.appendToast('Error fetching class assignments', { variant: 'danger' })
+      } finally {
+        loadingAssignments.value = false
       }
     }
 
@@ -114,12 +118,12 @@ export default {
           return PicoVue.appendToast('A person and role must be selected', { variant: 'warning' })
         const newAssign = await api.post(`assignments`, assignObj)
         classAssignments.value.push(newAssign)
-        PicoVue.appendToast('Student enrolled successfully', { variant: 'success' })
+        PicoVue.appendToast(`Successfully Assigned ${assignObj.role}`, { variant: 'success' })
         assignPersonModalRef.value.closeModal()
         assignObj.personId = ''
       } catch (error) {
-        console.error('Error enrolling student:', error)
-        PicoVue.appendToast('Error enrolling student in class', { variant: 'danger' })
+        console.error('Error assigning person:', error)
+        PicoVue.appendToast('Error assigning person', { variant: 'danger' })
       }
     }
 
@@ -127,6 +131,7 @@ export default {
       try {
         if (!classObj.value.title)
           return PicoVue.appendToast('Title is required', { variant: 'warning' })
+        loading.value = true
         const updatedClass = await api.put(`classes/${classObj.value.id}`, classObj.value)
         classObj.value = updatedClass
         PicoVue.appendToast('Class updated successfully', { variant: 'success' })
@@ -134,6 +139,8 @@ export default {
       } catch (error) {
         console.error('Error updating class:', error)
         PicoVue.appendToast('Error updating class', { variant: 'danger' })
+      } finally {
+        loading.value = false
       }
     }
 
@@ -141,6 +148,7 @@ export default {
 
     return {
       loading,
+      loadingAssignments,
       edit,
       classObj,
       people,
