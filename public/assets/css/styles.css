@@ -1,5 +1,10 @@
 :root {
-  --pico-font-size: 115%;
+  --pico-font-size: 120%;
+}
+
+a,
+[role=link] {
+  cursor: pointer;
 }
 
 svg {
