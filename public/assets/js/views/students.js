@@ -7,8 +7,8 @@ export default {
     <template #classes="{classes}">
       <div v-for="c of classes" :key="c.id" style="margin-right:5px"><router-link :to="'/classes/'+c.id">{{ c.title }}</router-link></div>
     </template>
-    <template #first-name="{id,fullName}">
-      <router-link :to="'/people/'+id">{{ fullName }}</router-link>
+    <template #person-full-name="{id,personFullName}">
+      <router-link :to="'/people/'+id">{{ personFullName }}</router-link>
     </template>
     <template #created="{created}">
       {{ new Date(created).toLocaleDateString() }}
@@ -23,8 +23,7 @@ export default {
     const students = Vue.ref([])
     const fields = [
       { name: 'personFullName', label: 'Name' },
-      'classes',
-      'modified'
+      'classes'
     ]
 
     async function fetchStudents() {
