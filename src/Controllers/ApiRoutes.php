@@ -13,9 +13,27 @@ class ApiRoutes
   public static function index($app)
   {
     try {
-      $app->get('/session', fn($app) => $app->sendJson($_SESSION['user'] ?? ['' => '']));
+      $auth = fn($app) => !$app->getCtx('user') ? $app->status(401)->sendJson(['error' => 'Unauthorized']) : false;
+      $app->post('/login', function ($app) {
+        $data = $app->getBody();
+        if (empty($data->username) || empty($data->password))
+          $app->sendJson(['error' => 'Invalid username and password']);
+        session_start();
+        $_SESSION['user'] = (object) ['id' => 1, 'username' => $data->username];
+        $app->setCtx('user', $_SESSION['user']);
+        session_write_close();
+        $app->sendJson(['result' => 'success']);
+      });
+      $app->get('/session', fn($app) => $app->sendJson($app->getCtx('user') ?? ['' => '']));
+      $app->post('/logout', $auth(...), function ($app) {
+        session_start();
+        unset($_SESSION['user']);
+        session_write_close();
+        $app->setCtx('user', null);
+        $app->sendJson(['result' => 'success']);
+      });
 
-      $app->group('/people', function ($app) {
+      $app->group('/people', $auth(...), function ($app) {
         $svc = new PeopleService;
         $app->post('/', fn($app) => $app->sendJson($svc->create($app->getBody())));
         $app->get('/', fn($app) => $app->sendJson($svc->getAll()));
@@ -26,7 +44,7 @@ class ApiRoutes
         $app->delete('/:id', $guard(...), fn($app) => $app->sendJson(['result' => $svc->delete($app->params->id)]));
       });
 
-      $app->group('/classes', function (Routy $app) {
+      $app->group('/classes', $auth(...), function (Routy $app) {
         $svc = new ClassService;
         $app->post('/', fn($app) => $app->sendJson($svc->create($app->getBody())));
         $app->get('/', fn($app) => $app->sendJson($svc->getAll()));
@@ -39,7 +57,7 @@ class ApiRoutes
         $app->delete('/:id', $guard(...), fn($app) => $app->sendJson(['result' => $svc->delete($app->params->id)]));
       });
 
-      $app->group('/assignments', function (Routy $app) {
+      $app->group('/assignments', $auth(...), function (Routy $app) {
         $svc = new ClassAssignmentsService;
         $app->post('/', fn($app) => $app->sendJson($svc->create($app->getBody())));
         $app->get('/', fn($app) => $app->sendJson($svc->getAll()));
