@@ -1,0 +1,58 @@
+{
+    "packages": [
+        {
+            "name": "ginger-tek/routy",
+            "version": "3.7.2",
+            "version_normalized": "3.7.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ginger-tek/routy.git",
+                "reference": "b28cd257f3f9f4a6111d5c5a2e84cd725e47226a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ginger-tek/routy/zipball/b28cd257f3f9f4a6111d5c5a2e84cd725e47226a",
+                "reference": "b28cd257f3f9f4a6111d5c5a2e84cd725e47226a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1.0"
+            },
+            "time": "2025-07-02T01:52:43+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "GingerTek\\": "GingerTek"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "GingerTek",
+                    "homepage": "https://github.com/ginger-tek"
+                }
+            ],
+            "description": "A simple, robust PHP router for fast app and API development",
+            "homepage": "https://github.com/ginger-tek/routy",
+            "keywords": [
+                "api",
+                "mpa",
+                "rest",
+                "router",
+                "routing",
+                "templating"
+            ],
+            "support": {
+                "issues": "https://github.com/ginger-tek/routy/issues",
+                "source": "https://github.com/ginger-tek/routy/tree/3.7.2"
+            },
+            "install-path": "../ginger-tek/routy"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}

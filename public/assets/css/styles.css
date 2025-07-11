@@ -1,0 +1,48 @@
+:root {
+  --pico-font-size: 115%;
+}
+
+svg {
+  vertical-align: middle;
+}
+
+.side-menu-split {
+  @media(min-width:768px) {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+
+    >article:has(aside nav) {
+      flex-shrink: 1;
+      flex: 0;
+      min-width: 200px;
+    }
+
+    >article:not(:has(aside nav)) {
+      flex: 1;
+      max-width: 100%;
+      overflow: auto;
+    }
+  }
+
+  @media(max-width: 767px) {
+    >article:has(aside nav) ul {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 0.5em;
+    }
+  }
+
+  @media(max-width: 380px) {
+    >article:has(aside nav) ul {
+      justify-content: space-evenly;
+
+      >li a {
+        width: 2em;
+        height: 2em;
+        overflow: hidden;
+      }
+    }
+  }
+}

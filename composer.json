@@ -1,0 +1,38 @@
+{
+    "name": "ginger-tek/bridgy",
+    "type": "project",
+    "description": "Simple class management system",
+    "homepage": "https://github.com/ginger-tek/jerpy",
+    "license": "ISC",
+    "authors": [
+        {
+            "name": "GingerTek",
+            "homepage": "https://github.com/ginger-tek"
+        }
+    ],
+    "keywords": [
+        "class management",
+        "school",
+        "education"
+    ],
+    "scripts": {
+        "post-create-project-cmd": [
+            "php -r \"array_map('mkdir', ['data']);\"",
+            "php -r \"copy('example.env', '.env');\"",
+            "npm install"
+        ]
+    },
+    "require": {
+        "php": ">=8.3.0",
+        "ginger-tek/routy": "^3.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bridgy\\": "src/"
+        }
+    },
+    "support": {
+        "issues": "https://github.com/ginger-tek/jerpy/issues",
+        "source": "https://github.com/ginger-tek/jerpy"
+    }
+}
