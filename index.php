@@ -12,6 +12,12 @@ use Bridgy\Controllers\ApiRoutes;
 $app = new Routy;
 
 $app->use(function (Routy $app) {
+  session_start(['read_and_close' => true]);
+  if ($_SESSION['user'] ?? false)
+    $app->setCtx('user', $_SESSION['user']);
+});
+
+$app->use(function (Routy $app) {
   if (preg_match('#/nm/#', $app->uri)) {
     $path = 'node_modules/' . str_replace('/nm/', '', $app->uri);
     if (!file_exists($path))
