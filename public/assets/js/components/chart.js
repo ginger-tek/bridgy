@@ -1,7 +1,7 @@
 import '/nm/chart.js/dist/chart.umd.js'
 
 export default {
-  template: `<div style="position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center">
+  template: `<div style="position:relative;width:100%;height:50dvh;display:flex;align-items:center;justify-content:center">
     <canvas ref="chartRef"></canvas>
     <p v-if="!hasData" align="center" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)">No data available</p>
   </div>`,
@@ -35,6 +35,7 @@ export default {
         data: props.data,
         options: {
           ...props.options,
+          maintainAspectRatio: false,
           responsive: true
         }
       })
