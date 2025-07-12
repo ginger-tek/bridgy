@@ -5,7 +5,7 @@ export default {
       <button @click="() => createPersonRef.openModal()">Add Person</button>
     </template>
     <template #first-name="{id,fullName}">
-      <router-link :to="'/people/'+id">{{ fullName }}</router-link>
+      <router-link :to="'people/'+id">{{ fullName }}</router-link>
     </template>
     <template #created="{created}">
       {{ new Date(created).toLocaleDateString() }}

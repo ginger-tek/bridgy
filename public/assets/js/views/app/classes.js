@@ -5,15 +5,15 @@ export default {
       <button @click="() => createClassRef.openModal()">Create Class</button>
     </template>
     <template #title="{id,title}">
-      <router-link :to="'/classes/'+id">{{ title }}</router-link>
+      <router-link :to="'classes/'+id">{{ title }}</router-link>
     </template>
     <template #instructors-names="{instructorsNames}">
-      <span v-if="instructorsNames.length === 0">No instructors assigned</span>
-      <div v-for="p of instructorsNames" :key="p.id" style="margin-right:5px"><router-link :to="'/people/'+p.id">{{ p.name }}</router-link></div>
+      <span v-if="instructorsNames?.length === 0">No instructors assigned</span>
+      <div v-for="p of instructorsNames" :key="p.id" style="margin-right:5px"><router-link :to="'people/'+p.id">{{ p.name }}</router-link></div>
     </template>
     <template #students-names="{studentsNames}">
-      <span v-if="studentsNames.length === 0">No students assigned</span>
-      <div v-for="p of studentsNames" :key="p.id" style="margin-right:5px"><router-link :to="'/people/'+p.id">{{ p.name }}</router-link></div>
+      <span v-if="studentsNames?.length === 0">No students assigned</span>
+      <div v-for="p of studentsNames" :key="p.id" style="margin-right:5px"><router-link :to="'people/'+p.id">{{ p.name }}</router-link></div>
     </template>
     <template #created="{created}">
       {{ new Date(created).toLocaleDateString() }}

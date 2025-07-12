@@ -1,5 +1,5 @@
 export default {
-  template: `<form @submit.prevent="login" class="login-form">
+  template: `<form @submit.prevent="login" style="max-inline-size:320px;margin-inline:auto">
     <h2>Login</h2>
     <label>Username
       <input v-model="username" type="text" required>
@@ -26,17 +26,15 @@ export default {
         })
         if (response.result == 'success') {
           store.session = await api.get('session')
-          Vue.nextTick(() => {
-            router.replace('/')
-            PicoVue.appendToast('Logged in successfully', { variant: 'success' })
-          })
-        } else
+          router.replace('/app')
+        } else {
+          loading.value = false
           PicoVue.appendToast(response.error || 'Login failed', { variant: 'danger' })
+        }
       } catch (ex) {
-        console.error('Login error:', ex)
-        PicoVue.appendToast('An error occurred during login', { variant: 'danger' })
-      } finally {
         loading.value = false
+        PicoVue.appendToast('An error occurred during login', { variant: 'danger' })
+        console.error('Login error:', ex)
       }
     }
 

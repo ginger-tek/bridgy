@@ -1,13 +1,18 @@
 import store from './store.js'
 
 const routes = [
-  { path: '/', component: () => import('./views/dashboard.js'), meta: { auth: true } },
-  { path: '/classes', component: () => import('./views/classes.js'), meta: { auth: true } },
-  { path: '/classes/:id', component: () => import('./views/class.js'), meta: { auth: true } },
-  { path: '/people', component: () => import('./views/people.js'), meta: { auth: true } },
-  { path: '/people/:id', component: () => import('./views/person.js'), meta: { auth: true } },
-  { path: '/students', component: () => import('./views/students.js'), meta: { auth: true } },
   { path: '/login', component: () => import('./views/login.js') },
+  {
+    path: '/app', component: () => import('./views/app.js'), meta: { auth: true }, children: [
+      { path: '', component: () => import('./views/app/dashboard.js') },
+      { path: 'classes', component: () => import('./views/app/classes.js') },
+      { path: 'classes/:id', component: () => import('./views/app/class.js') },
+      { path: 'people', component: () => import('./views/app/people.js') },
+      { path: 'people/:id', component: () => import('./views/app/person.js') },
+      { path: 'students', component: () => import('./views/app/students.js') },
+      { path: 'settings', component: () => import('./views/app/settings.js'), meta: { admin: true } },
+    ]
+  },
   { path: '/:pathMatch(.*)*', component: () => import('./views/notFound.js') },
 ]
 
@@ -16,10 +21,11 @@ const router = VueRouter.createRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  if (to.path !== '/login' && !store.session && to.meta.auth) {
+router.beforeEach((to, _from, next) => {
+  if (to.path !== '/login' && !store.session && to.meta.auth)
     return next('/login')
-  }
+  else if (to.path == '/login' && store.session)
+    return next('/app')
   next()
 })
 

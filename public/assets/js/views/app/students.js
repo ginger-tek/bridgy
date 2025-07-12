@@ -3,12 +3,12 @@ export default {
     <template #empty>
       <p>No students found</p>
       <router-link role="button" to="/classes">Go to Classes</router-link>
+    </template>    
+    <template #person-full-name="{id,personFullName}">
+      <router-link :to="'people/'+id">{{ personFullName }}</router-link>
     </template>
     <template #classes="{classes}">
-      <div v-for="c of classes" :key="c.id" style="margin-right:5px"><router-link :to="'/classes/'+c.id">{{ c.title }}</router-link></div>
-    </template>
-    <template #person-full-name="{id,personFullName}">
-      <router-link :to="'/people/'+id">{{ personFullName }}</router-link>
+      <div v-for="c of classes" :key="c.id" style="margin-right:5px"><router-link :to="'classes/'+c.id">{{ c.title }}</router-link></div>
     </template>
     <template #created="{created}">
       {{ new Date(created).toLocaleDateString() }}
