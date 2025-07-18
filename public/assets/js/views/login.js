@@ -33,7 +33,7 @@ export default {
         }
       } catch (ex) {
         loading.value = false
-        PicoVue.appendToast('An error occurred during login', { variant: 'danger' })
+        PicoVue.appendToast(ex.error || 'An error occurred during login', { variant: 'danger' })
         console.error('Login error:', ex)
       }
     }
