@@ -19,8 +19,8 @@ class ApiRoutes
         $data = $app->getBody();
         if (empty($data->username) || empty($data->password))
           $app->sendJson(['error' => 'Invalid username or password']);
-        $user = (new UsersService)->getByUsername($data->username);
-        if (!$user || !password_verify($data->password, $user->password))
+        $user = (new UsersService)->getByUsername(trim(strtolower($data->username)));
+        if (!$user || !password_verify(trim($data->password), $user->password))
           $app->status(401)->sendJson(['error' => 'Invalid username or password']);
         session_start();
         unset($user->password);

@@ -21,7 +21,7 @@ export default {
       try {
         loading.value = true
         const response = await api.post('login', {
-          username: username.value.trim(),
+          username: username.value.toLowerCase().trim(),
           password: password.value.trim()
         })
         if (response.result == 'success') {
