@@ -1,6 +1,6 @@
 <?php
 
-namespace Bridgy\Data;
+namespace App\Data;
 
 class DB
 {

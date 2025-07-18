@@ -1,6 +1,6 @@
 <?php
 
-namespace Bridgy\Services;
+namespace App\Services;
 
 class Logger
 {

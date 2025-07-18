@@ -1,8 +1,8 @@
 <?php
 
-namespace Bridgy\Services;
+namespace App\Services;
 
-use Bridgy\Data\DB;
+use App\Data\DB;
 
 class ClassService
 {
