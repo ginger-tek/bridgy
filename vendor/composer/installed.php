@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'ginger-tek/bridgy',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => NULL,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '74a1949b1600bb037287b4d1b817bd70f01056e8',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,18 +11,18 @@
     ),
     'versions' => array(
         'ginger-tek/bridgy' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => NULL,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '74a1949b1600bb037287b4d1b817bd70f01056e8',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'ginger-tek/routy' => array(
-            'pretty_version' => '3.7.2',
-            'version' => '3.7.2.0',
-            'reference' => 'b28cd257f3f9f4a6111d5c5a2e84cd725e47226a',
+            'pretty_version' => '3.8.1',
+            'version' => '3.8.1.0',
+            'reference' => '1be632b089880ec8f04e870bdd1ef678a6d8cb27',
             'type' => 'library',
             'install_path' => __DIR__ . '/../ginger-tek/routy',
             'aliases' => array(),

@@ -7,5 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'GingerTek\\' => array($vendorDir . '/ginger-tek/routy/GingerTek'),
-    'Bridgy\\' => array($baseDir . '/src'),
+    'App\\' => array($baseDir . '/src'),
 );

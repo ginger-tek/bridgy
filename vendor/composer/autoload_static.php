@@ -11,9 +11,9 @@ class ComposerStaticInitd75d6316e7fc93e98743a5fddbcf7fc9
         array (
             'GingerTek\\' => 10,
         ),
-        'B' => 
+        'A' => 
         array (
-            'Bridgy\\' => 7,
+            'App\\' => 4,
         ),
     );
 
@@ -22,7 +22,7 @@ class ComposerStaticInitd75d6316e7fc93e98743a5fddbcf7fc9
         array (
             0 => __DIR__ . '/..' . '/ginger-tek/routy/GingerTek',
         ),
-        'Bridgy\\' => 
+        'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
