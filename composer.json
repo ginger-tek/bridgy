@@ -24,11 +24,11 @@
     },
     "require": {
         "php": ">=8.3.0",
-        "ginger-tek/routy": "^3.7"
+        "ginger-tek/routy": "^3.8"
     },
     "autoload": {
         "psr-4": {
-            "Bridgy\\": "src/"
+            "App\\": "src/"
         }
     },
     "support": {

@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d75d6316e7fc93e98743a5fddbcf7fc9",
+    "content-hash": "f27ce62137e835f1818c91ad9661000f",
     "packages": [
         {
             "name": "ginger-tek/routy",
-            "version": "3.7.2",
+            "version": "3.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ginger-tek/routy.git",
-                "reference": "b28cd257f3f9f4a6111d5c5a2e84cd725e47226a"
+                "reference": "1be632b089880ec8f04e870bdd1ef678a6d8cb27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ginger-tek/routy/zipball/b28cd257f3f9f4a6111d5c5a2e84cd725e47226a",
-                "reference": "b28cd257f3f9f4a6111d5c5a2e84cd725e47226a",
+                "url": "https://api.github.com/repos/ginger-tek/routy/zipball/1be632b089880ec8f04e870bdd1ef678a6d8cb27",
+                "reference": "1be632b089880ec8f04e870bdd1ef678a6d8cb27",
                 "shasum": ""
             },
             "require": {
@@ -51,9 +51,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ginger-tek/routy/issues",
-                "source": "https://github.com/ginger-tek/routy/tree/3.7.2"
+                "source": "https://github.com/ginger-tek/routy/tree/3.8.1"
             },
-            "time": "2025-07-02T01:52:43+00:00"
+            "time": "2025-07-17T22:07:40+00:00"
         }
     ],
     "packages-dev": [],
@@ -62,7 +62,9 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": ">=8.3.0"
+    },
     "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
