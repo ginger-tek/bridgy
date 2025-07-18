@@ -22,9 +22,9 @@ const router = VueRouter.createRouter({
 })
 
 router.beforeEach((to, _from, next) => {
-  if (to.path !== '/login' && !store.session && to.meta.auth)
+  if ((to.path.match(/\/app/) || to.path === '/') && !store.session)
     return next('/login')
-  else if (to.path == '/login' && store.session)
+  else if ((to.path === '/login' || to.path === '/') && store.session)
     return next('/app')
   next()
 })
