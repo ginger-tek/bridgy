@@ -1,4 +1,18 @@
 CREATE TABLE
+  IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL UNIQUE,
+    email TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL,
+    role TEXT NOT NULL CHECK (role IN ('admin', 'user')) DEFAULT 'user',
+    loginAttempts INTEGER NOT NULL DEFAULT 0,
+    lastLoginAttempt TIMESTAMP,
+    isActive INTEGER NOT NULL DEFAULT 1,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  );
+
+CREATE TABLE
   IF NOT EXISTS people (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     firstName TEXT NOT NULL,
@@ -180,3 +194,7 @@ FROM
   class_campaigns cc
   LEFT JOIN classes c ON cc.classId = c.id
   LEFT JOIN campaigns cam ON cc.campaignId = cam.id;
+
+INSERT OR IGNORE INTO users (username, email, password, role)
+VALUES
+  ('admin', 'admin@example.com', '$2y$10$0sD0h5N5vZuOZh/6I8Qg9O/DSv57liPgEgoeGpmQJVUT4ovoNunOy', 'admin');
