@@ -11,6 +11,12 @@ svg {
   vertical-align: middle;
 }
 
+@media (max-width: 767px) {
+  :where(#brand>span, #logout>span) {
+    display: none;
+  }
+}
+
 .side-menu-split {
   @media(min-width:768px) {
     display: flex;
