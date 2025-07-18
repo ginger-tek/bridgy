@@ -10,12 +10,12 @@ Vue.createApp({
   template: `<header>
     <nav>
       <ul>
-        <li><b><icon></icon> Bridgy</b></li>
+        <li id="brand"><icon></icon> <span><b>Bridgy</b></span></li>
       </ul>
       <ul>
-        <li v-if="!store.session"><router-link to="/portal"><i class="bi bi-person-workspace"></i> Portal</router-link></li>
         <li v-if="store.session"><i class="bi bi-person-circle"></i> {{ store.session.username }}</li>
-        <li v-if="store.session"><a @click="logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+        <li v-if="!store.session"><router-link to="/login"><i class="bi bi-box-arrow-in-right"></i> Login</router-link></li>
+        <li v-else-if="store.session"><a @click="logout" id="logout"><i class="bi bi-box-arrow-right"></i> <span>Logout</span></a></li>
       </ul>
     </nav>
   </header>
